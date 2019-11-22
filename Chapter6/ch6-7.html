@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <h2>큰 자리수와 낮은자리수 같은지 비교</h2>
+        <hr>
+        <script>
+            var number = prompt("숫자 입력");
+            var operand = number;
+            var lastNumber = operand%10;
+            while(operand>=10){
+                operand=Math.floor(operand/10);
+            }
+            var firstNumber = operand;
+            if(firstNumber==lastNumber)
+                document.write(number + ": 성공");
+            else    
+                document.write(number + ": 다름");
+        </script>
+    </body>
+</html>

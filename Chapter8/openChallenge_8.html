@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>갬블링 게임</title>
+        <meta charset="utf-8">
+        <style>
+        #number{
+            display:inline-block;
+            background-color:bisque;
+            font-size:5rem;
+            color:cornflowerblue;
+            width:194px;
+            text-align:justify
+        }
+        #text{
+            color:cornflowerblue;
+            font-size:2rem;
+        }
+        </style>
+    </head>
+    <body>
+        <h3>겜블링 게임</h3>
+        <p>각 숫자를 클릭하면 0에서 2사이의 난수로 바뀝니다. 모두 같은 수가 나오면 승리합니다</p>
+        <hr>
+        <div id="number">
+            <span id="number_1">0</span>
+            <span id="number_2">0</span>
+            <span id="number_3">0</span>
+        </div>
+        <div id="text">
+        </div>
+        <script>
+            var focus = "number_1";
+            document.getElementById("number_1").addEventListener("click",function(){
+                if(focus == "number_1"){
+                    number_1 = Math.floor(Math.random()*3);
+                    this.innerHTML = number_1;
+                    focus="number_2";
+                }
+            });
+            document.getElementById("number_2").addEventListener("click",function(){
+                if(focus == "number_2"){
+                    number_2 = Math.floor(Math.random()*3);
+                    this.innerHTML = number_2;
+                    focus="number_3";
+                }
+            });
+            document.getElementById("number_3").addEventListener("click",function(){
+                if(focus == "number_3"){
+                    number_3 = Math.floor(Math.random()*3);
+                    this.innerHTML = number_3;
+                    if(number_1 == number_2 && number_2 == number_3){
+                        document.getElementById("text").innerHTML = "Success(click here to do again)";
+                    }
+                    else{
+                        document.getElementById("text").innerHTML = "fail(click here to do again)";
+                    }
+                }
+            });
+            document.getElementById("text").addEventListener("click",function(){
+                location.reload();
+            })
+        </script>    
+    </body>
+</html>

@@ -1,0 +1,31 @@
+img{
+    width:300px;
+}
+body{
+    background-color:aliceblue;
+}
+header>h1{
+    text-align:center;
+    color:brown;
+}
+p{
+    font-family:"Arial";
+    font-size:1em;
+    text-indent:1em;
+}
+header{
+    border-bottom:1px solid black;
+}
+a{
+    text-decoration:none;
+}
+ul{
+    border:1px dotted black;
+}
+h2{
+    color:blue;
+    text-shadow: 2px 2px 1px blue
+}
+footer{
+    background-color:orange;
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>나의 소개</title>
+        <style>
+        h2{
+            color:blue;
+            text-align:center;
+        }
+        hr{
+            border:5px solid darkslategray;
+        }
+        body{
+            background-color:mediumpurple;
+        }
+        span{
+            color:red;
+            font-size:2rem;
+        }
+        </style>
+    </head>
+    <body>
+        <h2 onmouseover="printImage()" onmouseout="deleteImage()">슈렉</h2>
+        <hr>
+        <img id="image">
+
+        저는 대한민국에서 태어나서 컴퓨터 공학을 전공하는 학생입니다.
+        제가 제일 좋아하는 과목은 <span>웹 프로그래밍</span>이고, 그 중에
+        서도 <span>자바스크립트</span>를 제일 잘합니다.
+        <script>
+        function printImage(){
+            document.getElementById('image').src="../images/images.jpeg";
+        }
+        function deleteImage(){
+            document.getElementById('image').src="";
+        }
+        </script>
+    </body>
+</html>
+//1부터 100만까지 더해서 걸리는 시간이 어느정도 걸리는지 알아보자.

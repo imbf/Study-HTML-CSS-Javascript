@@ -1,0 +1,20 @@
+body{
+    background-color: aliceblue;
+}
+h1{
+    color:brown;
+    text-align:center;
+}
+FORM{
+    padding-left:20px;
+    background-color: tomato;
+}
+footer{
+    padding-left:20px;
+    background-color:orange;
+    border-radius:5px;
+}
+span{
+    font-size:1.5em;
+    color:blue;
+}

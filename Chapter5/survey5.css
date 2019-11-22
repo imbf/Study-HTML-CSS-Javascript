@@ -1,0 +1,21 @@
+body{
+    background-color: aliceblue;
+    margin:0px;
+}
+h1{
+    text-align:center;
+    margin:0px;
+}
+header{
+    background-color:yellow;
+}
+FORM{
+    padding-left:20px;
+    background-color: tomato;
+    margin:10px;
+}
+footer{
+    padding-top:20px;
+    padding-bottom:20px;
+    background-color:plum;
+}
