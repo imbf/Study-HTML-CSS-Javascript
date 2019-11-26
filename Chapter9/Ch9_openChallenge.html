@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>마우스 클릭 연습</title>
+        <style>
+            table {
+                border : 1px solid skyblue;
+                border-collapse : collapse;
+            }
+            td {
+                border : 1px solid skyblue;
+                width : 50px;
+                height : 50px;
+                padding : 0px;
+            }
+            img{
+                width:50px;
+                height:50px;
+            }
+        </style>
+        <script>
+            var select=0;
+            var img = new Image();
+            img.src="../images/donkey.jpg";
+            function init() {
+                var table = document.getElementById("Table");
+                for(i = 0; i < 10; i++ ){
+                    var row = document.createElement("tr");
+                    for(j = 0; j < 10; j++ ){
+                        var col = document.createElement("td");
+                        col.innerHTML = "<img src=''>"  // td의 innerHTML에다가 img태그 삽입
+                        row.appendChild(col);
+                    }
+                    table.appendChild(row);
+                }
+                for(var i=0;i<100;i++) { // 100개의 이미지에 모두 click 리스너 등록
+                    document.images[i].onclick=moveImage;
+                    document.images[i].style.visibility = "hidden";
+                }
+                moveImage();
+            }
+            function moveImage() { // 다른 셀로 이미지를 옮기게끔 하는 function
+                document.images[select].src=""; // 현재 <img>에 보여질 이미지 제거
+                document.images[select].style.visibility = "hidden"; 
+                select = Math.floor(Math.random()*100); 
+                document.images[select].src=img.src; 
+                document.images[select].style.visibility = "visible"; 
+            }
+        </script>
+    </head>
+    <body onload="init()">
+        <h3>마우스 클릭 연습</h3>
+        <hr>
+        <table id="Table"></table>
+    </body>
+</html>
