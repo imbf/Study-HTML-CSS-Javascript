@@ -260,6 +260,84 @@ onload는 HTML 문서나 이미지의 로딩이 완료되는 시점에 호출되
 <!-- document.onload=function(){}는 예전에는 잘 사용하였지만 요즘에는 잘 사용하지 않는다. -->
 ```
 
+### 이미지 로딩 완료와 onload
+
+이미지가 출력되는 과정은 이미지 파일로부터 **로딩하는 과정**과 로딩된 **이미지를 출력하는 두 과정**으로 나뉜다.
+
+**Image 객체의 프로퍼티**
+
+- src : 이미지 주소
+
+- width : 이미지가 출력될 폭. 이미지가 로딩되면 이미지의 실제 폭으로 초기화
+
+- height : 이미지가 출력될 높이. 이미지가 로딩되면 이미지의 실제 높이로 초기화
+
+- complete : 이미지의 로딩이 완료되었는지 여부, true/false
+
+- Image 객체 활용 예시
+
+  ```html
+  <img id="myImg" src="apple.png" width="..." height="...">
+  <script>
+  	var myImg = document.getElementById("myImg");	//myImg는 Image객체
+    myImg.src = "banana.png"											//<img> 태그에 banana.png 이미지 출력
+  </script>
+  ```
+
+**이미지 로딩 완료와 onload**
+
+- 활용 예시
+
+  ```javascript
+  var myImg = document.getElementById("myImg");
+  myImg.src = "banana.png";	
+  myImg.onload = function(){	//이미지 로딩 완료 시 실행되는 함수
+    var width = myImg.width;	//정확한 이미지 폭을 알 수 있음
+  }
+  ```
+
+### new Image()로 이미지 로딩과 출력
+
+동적으로 Image 객체를 만들고 banana.png 이미지를 로딩시키는 코드
+
+```javascript
+var bananaImg = new Image();	// 이미지 객체 생성
+bananaImg.src = "banana.png"	// 이미지 로딩 지시. 이미지 로딩이 완료될 때 onload 호출
+```
+
+**로딩된 이미지 출력**
+
+```javascript
+var myImg = document.getElementById("myImg");
+myImg.src = bananaImg.src	// bananaImg 객체에 로딩된 이미지를 <img> 태그에 출력
+```
+
+---
+
+## 9-6. 폼과 이벤트 활용
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
