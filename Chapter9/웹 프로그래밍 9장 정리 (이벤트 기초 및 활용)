@@ -350,9 +350,51 @@ HTML 요소가 포커스를 받게 될 때 onfocus 리스너가 호출되고, �
 </html>
 ```
 
+### 라디오버튼과 체크박스
 
+```javascript
+/* 선택된 라디오버튼 알아내기 */
+var found = null;
+var kcity = document.getElementById("city");
+for(var i=0; kcity.length;i++){
+  if(kcity[i].checked == true)
+    found = kcity[i];
+}
+if(found != null)
+  alert(found.value + "이 선택되었음");
+else
+  alert("선택된 것이 없음")
+```
 
-
+```html
+<!-- 체크박스로 선택한 물품 계산 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>선택한 물품 계산하기</title>
+        <script>
+            var sum = 0;
+            function calc(cBox){
+                if(cBox.checked)
+                    sum+=parseInt(cBox.value);
+                else
+                    sum-=parseInt(cBox.value);
+                document.getElementById("sumText").value = sum;
+            }
+        </script>
+    </head>
+    <body>
+        <h3>물품을 선택하면 금액이 자동 계산됩니다.</h3>
+        <hr>
+        <form> 
+            <input type="checkbox" name="help" value="10000" onclick="calc(this)">모자 1만원
+            <input type="checkbox" name="shose" value="30000" onclick="calc(this)">구두 3만원
+            <input type="checkbox" name="bag" value="80000" onclick="calc(this)"> 명품가방 8만원<br>
+            지불하실 금액 <input type="text" id="sumText" value="0">
+        </form>
+    </body>
+</html>
+```
 
 
 
