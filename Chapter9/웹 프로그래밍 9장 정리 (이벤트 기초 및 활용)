@@ -316,7 +316,32 @@ myImg.src = bananaImg.src	// bananaImg 객체에 로딩된 이미지를 <img> �
 
 ## 9-6. 폼과 이벤트 활용
 
+### onblur와 onfocus
 
+이들은 포커스(focus)가 변경될 떄 호출된다.
+
+HTML 요소가 포커스를 받게 될 때 onfocus 리스너가 호출되고, 포커스를 잃는 요소에서는 onblur리스너가 호출된다.
+
+```html
+<!onfocus와 onblur, 이름을 입력하지 않고 다른 창으로 갈 수 없음-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>onfocus and onblur</title>
+    <script>
+    	function checkFiled(obj){
+        if(obj.value==""){
+          alert("enter name!");
+          obj.focus();	// obj에 다시 포커스
+        }
+      }
+    </script>
+  </head>
+  <body>
+    
+  </body>
+</html>
+```
 
 
 
