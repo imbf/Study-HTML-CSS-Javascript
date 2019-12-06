@@ -1,35 +1,32 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>라디오 버튼과 이미지 출력</title>
+        <title>라디오 버튼을 클릭하면 이미지를 출력합니다.</title>
         <style>
             img{
-                width:200px;
-                height:200px;
+                width:300px;
+                height:300px;
             }
         </style>
+        <script>
+            function clickRadio(e){
+                var img = document.querySelector("img")
+                if(e.value=="banana")
+                    img.src="../images/banana.jpg";
+                else if(e.value=="mango")
+                    img.src="../images/mango.jpeg";
+                else if(e.value=="apple")
+                    img.src="../images/apple.png"
+            }
+        </script>
     </head>
     <body>
         <h3>라디오 버튼을 클릭하면 이미지를 출력합니다.</h3>
         <hr>
-        <input class="radio" type="radio" name="image" value="banana" onclick="changeImage(this)"> 바나나
-        <input class="radio" type="radio" name="image" value="mango" onclick="changeImage(this)"> 망고
-        <input class="radio" type="radio" name="image" value="apple" onclick="changeImage(this)" checked> 사과
+        <input type="radio" name="fruits" value="banana" onclick="clickRadio(this)">바나나 
+        <input type="radio" name="fruits" value="mango" onclick="clickRadio(this)">망고
+        <input type="radio" name="fruits" value="apple" onclick="clickRadio(this)" checked>사과
         <br>
-        <img src="../images/apple.png" alt="에러">
-        <script>
-            function changeImage(e){
-                alert(e.value);
-                let img = document.querySelectorAll("img")
-                if(e.value=="banana"){
-                    img.src="../images/banana.jpg"
-                }else if(e.value == "apple"){
-                    img.src="../images/apple.png"
-                }else if(e.value == "mango"){
-                    img.src="../images/mango.jpeg"
-                }
-                
-            }
-        </script>
+        <img src="../images/apple.png" alt="">
     </body>
 </html>

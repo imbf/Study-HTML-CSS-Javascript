@@ -396,11 +396,60 @@ else
 </html>
 ```
 
+### select 객체와 on change
 
+select 객체는 \<select> 태그에 의해 만들어진 콤보박스를 나타내며, option 객체는 \<option>태그로 포현되는 옵션 아이템을 나타낸다. 다음은 하나의 select 객체에 3개의 option 객체가 있는 폼이다.
 
+```html
+<select id = "fruits">
+  <option value="1">딸기</option>
+  <option value="2" selected>바나나</option>
+  <option value="3">사과</option>
+</select>
+```
 
+**선택된 옵션 알아내기**
 
+앞의 폼에서 선택된 옵션은 다음과 같이 select 객체의 selectedIndex로 알아낼 수 있다.
 
+```javascript
+var sel = document.getElementById("fruits");
+var index = sel.selectedIndex;	//index가 음수이면 아무 옵션도 선택되지 않은 상태이다
+```
+
+**select와 onchange 리스너**
+
+select 객체에 다른 옵션이 선택되면 select 객체의 onchange 리스너가 호출된다. 다음은 on change 리스너에서 drawImage() 함수를 호출하도록 만든 코드이다.
+
+```html
+<select id="fruits" onchange="drawImage()">
+  ...
+</select>
+```
+
+### 키 이벤트, onkeydown, onkeypress, onkeyup
+
+**키와 관련된 이벤트 리스너**
+
+- onkeydown : 모든 키에 대해 키가 눌러지는 순간 호출
+- onkeypress : \<Enter, \<Space>, \<Esc> 키와 문자키에 대해서만 키가 눌러지는 순간 추가 호출, \<F1>, \<shift>, \<pgDn>, \<Del>, \<Ins> 등 문자키가 아닌 경우 호출되지 않음
+- onkeyup : 모든 키에 대해 눌러진 키가 떼어지는 순간 호출
+
+**키 이벤트 객체의 프로퍼티**
+
+- keyCode : 입력된 키의 유니코드 값
+- altKey : Alt 키가 눌러진 상태이면 true
+- altLeft : 왼쪽 Alt 키가 눌러진 상태이면 true
+- ctrlKey : Ctrl 키가 눌러진 상태이면 true
+- ctrlLeft : 왼쪽 Ctrl 키가 눌러진 상태이면 true
+- shiftKey : Shift 키가 눌러진 상태이면 true
+- shiftLeft : 왼쪽 Left 키가 눌러진 상태이면 true
+
+### onreset 과 onsubmit
+
+onreset리스너는 reset 버튼을 클릭하여 폼을 초기화할 때 호출된다.
+
+onsubmit리스너는 submit 버튼이 클릭되어 폼을 서버로 전송할 때 호출된다.
 
 
 
