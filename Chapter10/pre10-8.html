@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>산수를 풀어 봅시다.</title>
+        <style>
+            input[type="text"]{
+                
+                margin:10px;
+            }
+            button{
+                width:50px;
+                height:20px;
+            }
+            label{
+                display:inline-block;
+                width:50px;
+            }
+        </style>
+        <script>
+            var time =10;
+            function init(){
+                number = document.getElementById("number")
+                number.innerHTML = time;
+                let labels = document.querySelectorAll("label");
+                for(let i=0;i<labels.length;i++){
+                    let question = Math.floor(Math.random()*99+1).toString()
+                    let operator = Math.floor(Math.random()*4)
+                    question += insertOperator(operator);
+                    question += Math.floor(Math.random()*99+1).toString()
+                    labels[i].innerHTML = question;
+                }
+                var intervalID = setInterval(timeCount,1000)
+                setTimeout(check,10000)
+                function insertOperator(op){
+                    if(op==0){
+                        return '+';
+                    }else if(op==1){
+                        return '-';
+                    }else if(op==2){
+                        return '*';
+                    }else if(op==3){
+                        return '/';
+                    }
+                }
+                function timeCount(){  
+                        time = time -1;
+                        number.innerHTML = time;
+                    
+                }
+                function check(){
+                    let result =0;
+                    let texts = document.querySelectorAll("input");
+                    let labels = document.querySelectorAll("label");
+                    for(var i=0;i<texts.length;i++){
+                        if(Math.floor(eval(labels[i].innerHTML))==parseInt(texts[i].value)){
+                            result++;
+                        }else{
+                            labels[i].style.textDecoration = "line-through"
+                        }
+                    }
+                    document.getElementById("result").innerHTML = result;
+                    clearInterval(intervalID);
+                    time=10;
+                }
+            }
+            function reset(){
+                init();
+                clearText();
+                clearQuestion();
+                clearResult();
+            }
+            function clearText(){
+                let texts = document.querySelectorAll("input");
+                for(let i=0;i<texts.length;i++){
+                    texts[i].value = "";
+                }
+            }
+            function clearQuestion(){
+                let labels = document.querySelectorAll("label");
+                for(let i=0;i<labels.length;i++){
+                    labels[i].style.textDecoration="none";
+                }
+            }
+            function clearResult(){
+                document.querySelector("#result").innerHTML = 0;
+            }
+        </script>
+    </head>
+    <body onload="init()">
+        <h3>산수 문제를 풀어 봅시다.</h3>
+        <p>
+            문제는 자동으로 생성되며, 10초가 지나면 자동 채점됩니다.
+        </p>
+        <p id="time">
+            남은 시간 <span id="number"></span>
+        </p>
+        <hr>
+        <label id="question1"></label> <input type="text" id="answer1"><br>
+        <label id="question2"></label> <input type="text" id="answer2"><br>
+        <label id="question3"></label> <input type="text" id="answer3"><br>
+        <label id="question4"></label> <input type="text" id="answer4"><br>
+        <button type="button" onclick="reset()">다시</button> <span id="result" style="margin-left:10px;">0</span>
+    </body>
+</html>
