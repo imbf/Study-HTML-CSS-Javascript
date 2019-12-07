@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>눈 내리는 사걀의 마을</title>
+        <style>
+            body{
+                background-image:url("../images/background.jpeg");
+                background-size:100%;
+                background-repeat : no-repeat;
+            }
+            div{
+                display:inline-block;
+                position: absolute;
+            }
+            img{
+                width:20px;
+                height:20px;
+            }
+        </style>
+        <script>
+            function init(){
+                for(var i=0;i<30;i++){
+                    let div = document.createElement("div");
+                    let img = document.createElement('img');
+                    img.src = "../images/snow.svg"
+                    div.appendChild(img);
+                    document.querySelector('body').appendChild(div);
+                    div.style.left = Math.floor(Math.random()*1700) + "px";
+                    div.style.top = Math.floor(Math.random()*857) + "px";
+                }
+                setInterval(function(){
+                    let divs = document.querySelectorAll("div");
+                    for(var i=0;i<divs.length;i++){
+                        let div = divs[i];
+                        div.style.top = parseInt(div.style.top) +1 + "px";
+                        if(parseInt(div.style.top)>=853)
+                            div.style.top = 0;
+                    }
+                },10);
+            }
+        </script>
+    </head>
+    <body onload="init()">
+        
+    </body>
+</html>
