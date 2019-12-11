@@ -1,0 +1,58 @@
+<!-- 마우스 드래깅으로 캔버스에 그림 그리기 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>캔버스에 마우스 드래깅</title>
+    </head>
+    <body onload="init()">
+        <h3>마우스를 누른 채 드래깅하여 그림 그려 보세요</h3>
+        <hr>
+        <canvas id="myCanvas" style="background-color: aliceblue;" width="1200" height="600"></canvas><br>
+        <label>선굵기 :</label> <input type="text" id="lineWidth" onchange="changeLineWidth(this)"> <label>선 색 : </label> <input type="color" onchange="changeColor(this)">
+        <script>
+            var canvas, context;
+            function init(){
+                canvas = document.getElementById("myCanvas");
+                context = canvas.getContext("2d");
+                
+                context.lineWidth = 2;          //선 굵기 2  
+                context.strokeStyle = "black"    //선 색깔 black
+
+                canvas.addEventListener("mousedown", function(e){ down(e) }, false);
+                canvas.addEventListener("mouseup", function(e){ up(e) }, false);
+                canvas.addEventListener("mousemove", function(e){ move(e) }, false);
+                canvas.addEventListener("mouseout", function(e){ out(e) }, false);
+            }
+            function changeColor(obj){
+                context.strokeStyle = obj.value;
+            }
+            function changeLineWidth(obj){
+                context.lineWidth=obj.value;
+            }
+            var startX=0, startY=0;     // 드래깅동안, 처음 마우스가 눌러진 좌표
+            var dragging=false;
+            function draw(curX, curY){
+                context.beginPath();
+                context.moveTo(startX, startY);
+                context.lineTo(curX,curY);
+                context.stroke();
+            }
+            function down(e){
+                startX = e.offsetX; startY = e.offsetY; dragging = true;
+            }
+            function up(e){
+                dragging = false;
+            }
+            function move(e){
+                if(!dragging) return;       // 마우스가 눌러지지 않았으면 리턴
+                var curX = e.offsetX
+                var curY = e.offsetY;
+                draw(curX, curY);
+                startX = curX; startY = curY;
+            }
+            function out(e){
+                dragging = false;
+            }
+        </script>
+    </body>
+</html>
