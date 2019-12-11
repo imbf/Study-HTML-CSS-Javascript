@@ -353,6 +353,130 @@ context.fillStyle = "yellowgreen";
 context.fill();	//경로에 있는 닫힌 원호 내부 칠하기
 ```
 
+### 텍스트 그리기
+
+캔버스에 텍스트(문자열)을 쓸 수 있따. 텍스트는 비트맵 이미지로 출력되므로 쓴다기보다는 그린다는 것이 옳다.
+그러므로 캔버스에서 텍스트만 지우거나 떼어 내어 옮기는 것은 불가능하다. 텍스트는 경로에 담지 않고 캔버스에 바로 그린다.
+
+1. 텍스트의 외곽선만 그리기 - strokeText()
+2. 외곽선 없이 텍스트 내부 채워 그리기 - fillText()
+
+**strokeText(text, x, y [, maxwidth])**
+**fillText(text, x, y [, maxwidth])**
+
+- text : 출력하고자 하는 문자열 텍스트
+- x, y : 텍스트가 출력되는 시작 점 (x, y)
+- maxwidth : 텍스트가 출력되는 최대 폭. text가 이 값보다 크면 자동으로 다른 폰트로 대체됨
+
+**텍스트 외곽선 그리기**
+
+strokeText()는 컨텍스트의 strokeStyle과 lineWidth에 지정된 값으로 텍스트의 외곽선을 그린다.
+
+```javascript
+context.strokeStyle = "blue"	//외곽선 색
+context.lineWidth = "1"				//외곽선 굴기 1픽셀
+context.strokeText("Javascript", 30, 100);
+```
+
+**텍스트 채워 그리기**
+
+fillText()는 strokeStyle과 lineWidth를 무시하고 fillStyle 값만 반영하여 텍스트 내부를 채워 그린다.
+
+```javascript
+context.fillStyle = "green"		//채우기 색
+context.fillText("Javascript", 30, 200);
+```
+
+**폰트**
+
+텍스트의 폰트는 font 프로퍼티로 지정하며 디폴트는 10px의 sans-serif이다.
+
+```javascript
+context.font = "20px arial";		//20픽셀의 보통 스타일, arial 서체
+context.font = "italic 20px arial"	// 20픽셀의 이탤릭 스타일, arial 서체
+```
+
+**정렬**
+
+textAlign 프로퍼티에 "left(디폴트)", "right", "center", "start", "end"중 한 값을 지정하 텍스트의 출력 위치를 지정할 수 있다
+
+```javascript
+context.textAlign = "right"		//오른쪽 정렬
+context.strokeText("Javascript", 100, 10)	// 정렬의 기준점 (100, 10)
+```
+
+---
+
+## 11-3. 이미지 그리기
+
+### 이미지 객체 생성
+
+이미지 객체 생성 코드
+
+```javascript
+var img = new Image();
+```
+
+### 이미지 로딩과 onload
+
+```javascript
+img.onload = function(){	//이미지 로딩이 완료도면 함수 코드 실행
+  ...						// 이곳에 img 객체에 로드된 이미지를 그리는 코드 작성
+}
+img.src = "test.png"		// img 객체에 test.png 파일로부터 이미지 로딩 시작
+```
+
+### 이미지 그리기
+
+이미지 로딩이 완료되면 컨텍스트 객체의 drawImage() 메소드를 이용하여 이미지를 그린다.
+
+**원본 크기로 그리기**
+
+원본 이미지 크기 그대로 그리는 drawImage()는 다음과 같다.
+
+> **drawImage(img, dx, dy)** : img 객체에 든 비트맵 이미지를 원본 크기로 캔버스 (dx, dy) 위치에 그린다.
+>
+> - img : 이미지 객체
+> - dx, dy : 이미지가 그려질 캔버스 좌표 (dx, dy)
+
+**크기 조절하여 그리기**
+
+원본 이미지의 크기를 조절하여 그리는 drawImage()는 다음과 같다.
+
+>  **drawImage(img, dx, dy, dWidth, dHeight)** : img 객체의 비트맵 이미지를 캔버스의 (dx, dy) 위치에																				  dWidth x dHeight 크기로 변형하여 그린다.
+>
+> - dWidth, dHeight : 이미지가 그려지는 크기, dWidth x dHeight
+
+**원본의 일부분을 크기 조절하여 그리기**
+
+원본 이미지의 일부분을 택하고 크기를 조절하여 그리는 drawImage()는 다음과 같다.
+
+> drawImage(img, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight) : img 이미지 내부의 (sx, sy) 위치에서
+> 					sWidth x sHeight 영역의 비트맵을, 캔버스 (dx, dy) 위치에 dWidth x dHeight 크기로 변형하여 그린다.
+>
+> - sx, sy : img 이미지 내 비트맵 좌표 (sx, sy)
+> - sWidth, sHeight : 그리기 위해 선택한 img 내의 비트맵 크기
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
