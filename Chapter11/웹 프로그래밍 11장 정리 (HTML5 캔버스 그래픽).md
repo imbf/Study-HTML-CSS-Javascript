@@ -250,6 +250,123 @@ context.strok();	//캔버스에 원호를 그린다.
 </html>
 ```
 
+### stroke()는 경로에 담긴 도형(직선, 원호, 곡선)을 직선 연결하여 그린다.
+
+stroke()는 직선, 원호, 곡선을 그릴 때 경로 안에 만들어진 순서로 도형들을 연결하여 그린다.
+하지만 사각형의 경우 이전 도형을 연결하는 직선을 그리지 않는다.
+
+### 사각형 그리기
+
+사각형을 그리는데 필요한 컨텍스트 객체의 메소드
+
+- rect(x, y, w, h) : (x, y)에서 w x h 크기의 사각형을 경로에 삽입한다.
+
+- strokeRect(x, y, w, h) : (x, y)에서 w x h 크기의 사각형을 경로에 삽입하지 않고 캔버스에 직접 그린다.
+
+   ```javascript
+   context.rect(10, 10, 100, 100);	// (10, 10)에서 100x100 크기의 사각형을 경로에 추가
+   context.stroke()								// 경로에 구성된 사각형을 캔버스에 그린다.
+   
+   context.strokeRect(10, 10, 100, 100);		// (10, 10)에서 100x100 크기의 사각형 그리기
+   ```
+
+### beginPath()와 closePath()
+
+경로는 beginPath() 이후 다음 beginPAth()가 호출될 때까지 이어진다. stroke() 후에도 경로는 사라지지 않는다.
+closePath()는 경로의 끝점에서 moveTo()로 설정된 시작점까지 직선을 경로에 추가하여 닫힌 도형이 되게 한다.
+
+### 캔버스 지우기
+
+캔버스에 그려진 그래픽을 모두 지우고자 할 때 사용하는 메소드
+
+```javascript
+context.clearRect(0, 0, canvas.width, canvas.height);
+```
+
+### 도형 꾸미기
+
+strokeStyle 프로퍼티를 이용하면 선의 색을 지정할 수 있다. 채우기 색은 fillStyle 프로퍼티를 이용하면 된다.
+
+```javascript
+context.strokeStyle = "blue";
+
+context.fillStyle = "red";
+```
+
+lineWidth 프로퍼티를 이용하면 선 굵기를 지정할 수 있다.
+
+```javascript
+context.lineWidth = 20;	// 선 굵기를 20픽셀로 지정
+```
+
+### 칠하기
+
+도형의 내부를 색으로 칠하는 기능은 다음 3가지이다.
+
+1. 원호 내부 칠하기
+2. 사각형 내부 칠하기
+3. 텍스트 내부 칠하기
+
+**fillStyle 프로퍼티**
+
+원호나 사각형, 텍스트의 내부를 칠할 색은 fillStyle 프로퍼티에 지정한다.
+
+```javascript
+context.fillStyle = "violet";
+```
+
+**fillRect()로 채운 사각형 그리기**
+
+fillRect()는 경로에 넣지 않고 fillStyle에 주어진 색으로 사각형을 캔버스에 바로 채워 그린다.
+
+```javascript
+context.fillStyle = "violet";
+context.fillRect(20, 20, 100, 100);		//경로에 넣지 않고 바로 그리기
+```
+
+**fill()로 경로에 만들어진 닫힌 도형 내부 칠하기**
+
+fill()은 경로에 담긴 닫힌 도형의 내부만 칠하는 메소드이다.
+
+```javascript
+// 사각형의 내부는 violet으로, 외곽선은 gray 색으로 그리는 코드이다.
+context.beginPath();
+context.fillStyle = "violet";
+context.rect(20, 20, 100, 100);		//경로에 사각형 삽입
+context.fill(); 									//경로내 사각형 내부 칠하기
+context.strokeStyle = "gray";
+context.lineWidth = 10;
+context.stroke();									//경로내 사각형의 외곽선 그리기
+```
+
+**fill()로 원호 내부 칠하기**
+
+fill()은 경로 내 닫힌 영역(도형들)의 내부를 칠하는 메소드이므로 fill()을 이용하여 원호의 내부를 칠하려면 닫힌 원호를 만들어야 한다.
+
+```javascript
+context.beginPath();
+context.movetTo(x,y);		//원호의 중심(x, y)을 경로의 시작점으로
+context.arc(x, y, radius, 0, 1.5*Math.PI);
+	//arc()의 실행 결과 경로의 시작점(x,y)에서 원호의 시작점(0도 위치)까지의 직선 자동 추가
+context.closePath();	//원호의 끝점(270도)에서 경로 시작점(x,y)까지의 직선 자동 추가
+context.fillStyle = "yellowgreen";
+context.fill();	//경로에 있는 닫힌 원호 내부 칠하기
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
