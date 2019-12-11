@@ -211,16 +211,44 @@ context.closePath();
 - endAngle : 원호의 끝 각도. 3시를 기점으로 시계방향으로 각도 계산
 - anticlockwise : true이면 반시계방향, false이면 시계방향으로 원호그리기 (default : 시계 방향)
 
-PI(파이)를 활용해서 각도를 만들어야 한다.
+PI(π)를 활용해서 각도를 만들어야 한다.
 
 ```javascript
 // 0도에서 270도 까지 반지름 10인 원호를 그리는 코드
 context(50, 50, 10, 0, 1.5*Math.PI, false)
-// 
+// (50, 50)을 중심으로 반지름이 10인 원호를 경로에 추가. 원호는 0~270도(3π/2 지점)까지 시계 방향
 context.strok();	//캔버스에 원호를 그린다.
 ```
 
+```html
+<!-- 중심이 (100, 70)이고 반지름이 각각 30, 50인 두 개의 원호를 그린 코드를 보여준다. -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>원호 그리기</title>
+    </head>
+    <body>
+        <h3>원호 그리기</h3>
+        <hr>
+        <canvas id="myCanvas" style="background-color: aliceblue;" width="200" height="150" ></canvas>
+        <script>
+            var canvas = document.getElementById("myCanvas");
+            var context = canvas.getContext("2d");
 
+            context.beginPath();        // 빈 경로 구성
+            context.strokeStyle = "magenta";
+            context.arc(100, 70, 30,0, 1.5*Math.PI, false);   // 시계 방향  //3시를 기점으로 시계방향으로 270도 계산
+            context.stroke();           // 경로에 있는 원호를 그린다.
+
+            context.beginPath();        // 이전 경로 지우고 빈 경로 구성
+            context.strokeStyle = "blue";
+            context.arc(100, 70, 50, 0.5*Math.PI, Math.PI, true);   // 반시계 방향 //3시를 기점으로 시계방향으로 180도 계산
+            context.stroke();           // 경로에 있는 원호를 캔버스에 그린다.
+
+        </script>
+    </body>
+</html>
+```
 
 
 
