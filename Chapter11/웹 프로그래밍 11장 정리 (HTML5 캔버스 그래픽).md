@@ -457,13 +457,39 @@ img.src = "test.png"		// img 객체에 test.png 파일로부터 이미지 로딩
 > - sx, sy : img 이미지 내 비트맵 좌표 (sx, sy)
 > - sWidth, sHeight : 그리기 위해 선택한 img 내의 비트맵 크기
 
+### 이미지 그리기 사례
 
+**(20, 20) 위치에 원본 크기로 그리기**
 
+```javascript
+var img = new Image();
+img.onload = function(){		// 이미지 로딩이 완료되면 실행되는 함수
+  context.drawImage(img, 20, 20);	// img의 비트맵 이미지를 (20, 20)에 원본 크기로 그린다.
+}
+img.src = "text.png";	// 이미지 로딩을 시작시킨다.
+```
 
+**(20, 20) 위치에 100 x 200 크기로 그리기**
 
+```javascript
+var img = new Image();
+img.onload = function(){	//이미지 로딩이 완료되면 실행되는 함수
+  context.drawImage(img, 20, 20, 100, 200)	// img를 (20,20)에 100x200 크기로 그린다.
+}
+img.src = "text.png";	//이미지 로딩을 시작시킨다.
+```
 
+**캔버스에 꽉 차게 이미지 그리기**
 
+캔버스의 크기는 canvas.width와 canvas.height로 알아낼 수 있다.
 
+```javascript
+var img = new Image();
+img.onload = function(){	// 이미지 로딩이 완료되면 실행되는 함수vco
+  context.drawImage(img, 0, 0, canvas.width, canvas.height);
+}
+img.src = "text.png";	// 이미지 로딩을 시작시킨다.
+```
 
 
 
