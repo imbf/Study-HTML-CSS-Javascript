@@ -23,7 +23,6 @@
             var inputs = document.querySelectorAll("input");
 
             function drawChart(){
-                
                 context.clearRect(0,0,canvas.width,canvas.height);
                 var sumOfValue = 0;
                 for(let i=0;i<inputs.length;i++){
@@ -49,8 +48,6 @@
                     context.fillStyle = colors[i];
                     context.fill();
                 }
-
-                
             }
         </script>
     </body>

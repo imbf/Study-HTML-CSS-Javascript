@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>폼으로 원호 그리기</title>
+        <style>
+            input[type="text"]{
+                width:200px;
+                margin:5px;
+            }
+            label{
+                display:inline-block;
+                width:80px;
+                text-align: right;
+            }
+            button{
+                width:50px;
+                height:20px;
+                background-color: gainsboro;
+                margin-left:245px;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>폼으로 원호 그리기</h3>
+        <hr>
+        <label>x</label> <input type="text" id="x"> <label>y</label> <input type="text" id="y"><br>
+        <label>반지름</label> <input type="text" id="radius"> <label>방향</label> 
+        <select id="direction">
+            <option value="clockwise">시계방향</option>
+            <option value="counterClockwise">반시계방향</option>
+        </select>
+        <br>
+        <label>시작각도</label> <input type="text" id="startDegree"> <label>끝각도</label> <input type="text" id="endDegree"><br>
+        <label>선굵기</label> <input type="text" id="lineWidth"> <label>선색</label> <input type="color" id="color"><br>
+        <button type="button" onclick="draw()">그리기</button> <button type="button" onclick="erase()">지우기</button><br><br>
+        <canvas id="myCanvas" width="1600" height="600" style="background-color:aliceblue;"></canvas>
+        <script>
+            var canvas = document.getElementById("myCanvas");
+            var context = canvas.getContext("2d");
+            
+            function draw(){
+                let x = document.getElementById("x").value;
+                let y = document.getElementById("y").value;
+                let radius = document.getElementById("radius").value;
+                let direction = document.getElementById("direction").value;
+                let startDegree = parseInt(document.getElementById("startDegree").value)*Math.PI/180;
+                let endDegree = parseInt(document.getElementById("endDegree").value)*Math.PI/180;
+                let lineWidth = document.getElementById("lineWidth").value;
+                let color = document.getElementById("color").value;
+                if(direction == "시계방향")
+                    direction=false;
+                else
+                    direction=true;
+                context.beginPath();
+                context.lineWidth = lineWidth;
+                context.strokeStyle = color;
+                context.arc(x,y,radius,startDegree,endDegree,direction)
+                context.stroke();
+            }
+
+            function erase(){
+                context.clearRect(0,0,canvas.width,canvas.height);
+            }
+        </script>
+    </body>
+</html>
