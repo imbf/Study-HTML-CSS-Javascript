@@ -491,25 +491,118 @@ img.onload = function(){	// 이미지 로딩이 완료되면 실행되는 함수
 img.src = "text.png";	// 이미지 로딩을 시작시킨다.
 ```
 
+---
 
+## 11-4. canvas 객체와 마우스 이벤트 활용
 
+canvas 객체 역시 DOM 객체이므로 이벤트를 처리할 수 있다. 이 절에서는 마우스 이벤트를 이용하여, 다음과 같은 사용자가
+마우스로 드래깅하여 캔버스 위에 자유롭게 그림을 그리는 자바스크립트 응용 프로그램을 작성해 보자.
 
+### 캔버스 태그와 초기화
 
+**캔버스 태그**
 
+캔버스의 크기는 500 x 400, 배경색은 aliceblue로 \<canvas> 태그를 작성한다.
 
+```html
+<canvas id="myCanvas" style="background-color:aliceblue" width="500" height="400"></canvas>
+```
 
+**캔버스 객체와 컨텍스트 알아내고 초기화**
 
+캔버스 객체와 컨텍스트 객체를 알아내고 선의 굵기를 2픽셀, 색을 blue로 지정한다.
 
+```javascript
+var canvas, context;
+canvas = document.getElementById("myCanvas");
+context = canvas.getContext("2d");
+context.lineWidth = 2;				//선 굵기를 2픽셀로 지정
+context.strokeStyle = "blue"	//선 색을 파란색으로 지정
+```
 
+**마우스 리스너 등록**
 
+마우스가 눌러질 때(mousedown), 눌러진 마우스가 놓여 질 때(mouseup), 마우스를 움직이는 동안 (mousemove), 
+마우스가 캔버스 영역을 벗어나는 경우 (mouseout)를 처리하는 이벤트 리스너 코드를 작성하고 등록한다.
 
+```javascript
+canvas.addEventListener("mousedown", function(e){ down(e) }, false);
+canvas.addEventListener("mouseup", function(e){ up(e) }, false);
+canvas.addEventListener("mousemove", function(e){ move(e) }, false);
+canvas.addEventListener("mouseout", function(e){ out(e) }, false);
+// 이벤트가 발생하면 마우스 이벤트 객체가 function(e)의 매개변수 e에 전달된다.
+```
 
+### 마우스 이벤트 처리
 
+**마우스가 눌러질 때, function down(e) 실행**
 
+마우스가 눌러지면 down(e) 함수가 실행되며, 이벤트 객체 e의 **e.offsetX**와 **e.offsetY**를 통해 캔버스 내 마우스가 눌러진 위치를 알 수 있다. 마우스가 눌려진 위치에서 드래깅하는 동안 그림을 그리기 때문에 마우스가 눌러진 위치를 전역변수 startX와 startY에 저장한다.
 
+```javascript
+startX = e.offsetX;	// 마우스가 눌러진 x 위치 저장
+startY = e.offsetY;	// 마우스가 눌러진 y 위치 저장
+```
 
+드래깅을 통해 그림이 그려질 상태를 뜻하는 dragging 변수를 true로 설정한다.
 
+```javascript
+dragging = true;
+```
 
+**마우스가 놓여 질 때, function up(e) 실행**
+
+마우스가 놓여지면 드래깅이 끝났으므로 dragging 변수를 false로 설정한다.
+
+```javascript
+dragging = false;
+```
+
+**마우스가 움직일 때, function move(e) 실행**
+
+마우스가 움직이는 동안 mousemove 이벤트가 계속 발생하여 move(e) 함수가 계속 호출한다.
+move(e) 함수는 다음 코드를 이용하여 마우스가 눌러져 있지 않으면 그냥 리턴한다.
+
+```javascript
+if(!dragging) return;
+```
+
+dragging이 true라면 curX와 curY에 현재 마우스의 위치 값 e.offsetX와 e.offsetY를 저장한다.
+
+```javascript
+curX = e.offsetX; curY = e.offsetY;
+```
+
+그리고 나서 (startX, startY)에서 (curX, curY) 사이의 선을 그리도록 draw(curX, curY)를 호출한다.
+
+```javascript
+draw(curX, curY);
+```
+
+(curX, curY)는 드래깅하는 동안 계속 변하는 마우스 커서의 현재 위치이다. startX와 startY를 현재 마우스의 위치로 변경하고 함수를 빠져나온다.
+
+```javascript
+startX = curX; startY = curY;
+```
+
+**마우스가 캔버스를 벗어날 때, function out(e) 실행**
+
+마우스가 캔버스를 벗어나면 그림 그리기를 중단시킨다. 이를 위해 out(e)  함수에서는 다음과 같이 dragging 변수 값을 false로 설정한다.
+
+```javascript
+dragging = false;
+```
+
+다시 캔버스 상에 마우스가 눌러져야 그리기를 시작할 수 있다.
+
+### 그림 그리기, draw(curX, curY)
+
+```javascript
+context.beginPath();						// 새로운 경로 시작
+context.moveTo(startX, startY);	// 경로에 시작점 추가
+context.lineTo(curX, curY);			// 경로에 (startX, startY)에서 (curX, curY) 사이의 선 추가
+context.stroke();								//경로 모두 그리기
+```
 
 
 
