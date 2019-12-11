@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>캔버스에 파이 차트 그리기</title>
+        <style>
+            input{
+                display:inline-block;
+                width:100px;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>학점 별로 학생 수를 입력하면 파이 차트로 비율 그리기</h3>
+        <hr>
+        A <input type="text"> 명 B <input type="text"> 명 C <input type="text"> 명 <br>
+        D <input type="text" > 명 F <input type="text"> 명 <button onclick="drawChart()" style="background-color: gainsboro;">차트 그리기</button><br><br>
+        <canvas id="myCanvas" width="1600" height="700" style="background-color: aliceblue;"></canvas>
+        <script>
+            var colors = ["blue", "green", "yellow", "magenta", "red"];
+            var grades = ["A", "B", "C", "D", "F"];
+            var canvas = document.getElementById("myCanvas");
+            var context = canvas.getContext("2d");
+            var inputs = document.querySelectorAll("input");
+
+            function drawChart(){
+                
+                context.clearRect(0,0,canvas.width,canvas.height);
+                var sumOfValue = 0;
+                for(let i=0;i<inputs.length;i++){
+                    sumOfValue += parseInt(inputs[i].value);
+                }
+                var currentRotate = parseInt(inputs[0].value)/sumOfValue*2*Math.PI;
+                for(let i=0;i<inputs.length;i++){
+                    let text = grades[i] + " 학점";
+                    text += Math.floor((parseInt(inputs[i].value) / sumOfValue)*100);
+                    text += "% : " + colors[i];
+                    context.fillStyle = "blue";
+                    context.font = "20px forte "
+                    context.fillText(text,10,20*(i+1));
+                    context.beginPath();
+                    context.moveTo(800,350);
+                    if(i==0)
+                        context.arc(800,350,300,0,currentRotate);
+                    else{
+                        context.arc(800,350,300,currentRotate,currentRotate+parseInt(inputs[i].value)/sumOfValue*2*Math.PI)
+                        currentRotate += parseInt(inputs[i].value)/sumOfValue*2*Math.PI
+                    }
+                    context.closePath();
+                    context.fillStyle = colors[i];
+                    context.fill();
+                }
+
+                
+            }
+        </script>
+    </body>
+</html>
