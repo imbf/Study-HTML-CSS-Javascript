@@ -103,7 +103,124 @@ context.stroke();							// 현재까지 구성된 도형을 캔버스에 그린�
 
 ## 11-2. 도형 그리기와 채우기
 
-## 
+캔버스에 그릴 수 있는 도형의 종류는 직선, 사각형, 원호 등이며, 외곽선만 그리거나 도형 내부를 색으로 채워 그릴 수 있다.
+
+### 도형 그리는 과정
+
+**경로(path) : ** 캔버스 위에 '붓(펜)이 지나가는 길'
+
+직선 사각형 원호 등의 도형을 그리는 과정
+
+1. 경로(path) 만들기
+2. 캔버스의 경로에 담긴 도형 모두 그리기
+
+moveTo(), lineTo(), rect(), arc() 등의 메소드는 캔버스에 직접 그리지 않고 도형을 경로에 추가한다.
+
+- beginPath() : 새로운 빈 경로를 만든다.
+- stroke() : 경로에 담긴 모든 도형을 순서대로 캔버스에 그린다(외곽선만).
+- fill() : 경로에 담긴 모든 도형을 순서대로 색으로 채워 캔버스에 그린다(외곽선 없이).
+- clothPath() : 경로의 끝점과 경로의 시작점을 연결하는 직선을 추가하고 경로를 닫는다.
+
+**경로 만들기**
+
+경로를 만들기 위해서는 다음과 같이 먼저 빈 경로를 만든다.
+
+```javascript
+context.beginPath();	// 빈 경로 구성
+```
+
+그러고 나면 moveTo() 로 경로에 시작점을 설정한다.
+
+```javascript
+context.moveTo(120, 20);	// (120, 20)을 시작점으로 설정
+```
+
+시작점에서부터 경로를 구성해 간다.
+
+```javascript
+context.lineTo(20, 50);		// (120, 20)에서 (20, 50)까지의 직선을 경로에 추가
+context.lineTo(150, 120);	// (20, 50)에서 (150, 120)까지의 직선을 경로에 추가
+```
+
+**캔버스에 경로전체 그리기**
+
+stroke() 메소드는 context의 경로에 담긴 도형을 순서대로 모두 그린다.
+
+```javascript
+context.stroke();		// context의 경로 속 도형들을 캔버스에 모두 그린다.
+```
+
+**경로 지우기**
+
+context의 경로 안에 만들어진 도형을 모두 지우려면 다음과 같이 경로를 새로 시작하면 된다.
+
+```javascript
+context.beginPath();
+```
+
+**경로 닫기**
+
+경로 닫기는 closePath() 메소드를 이용하며, 현재 경로에 만들어진 도형의 끝점과 경로의 시작점을 연결하는 직선을 자동으로 경로에 추가한다.
+
+```javascript
+context.closePath();
+```
+
+### 선 그리기
+
+선을 그리기 위해 필요한 컨텍스트 객체의 메소드
+
+- moveTo(x, y) : 경로에 담긴 도형은 그대로 두고, 점 (x, y)를 새 시작점으로 삽입한다.
+- lineTo(x, y) : 경로의 끝 점에서 (x, y)까지 직선을 경로에 추가한다.
+
+```html
+<!-- 선으로 삼각형 그리기 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>선으로 삼각형 그리기</title>
+    </head>
+    <body>
+        <h3>선으로 삼각형 그리기</h3>
+        <hr>
+        <canvas id="myCanvas" style="background-color:aliceblue" width="200" height="150"></canvas>
+        <script>
+            var canvas = document.getElementById("myCanvas");
+            var context = canvas.getContext("2d");
+
+            context.beginPath();            // 빈 경로 만들기
+            context.moveTo(120, 20);        // (120, 20)을 시작점으로 설정
+            context.lineTo(20, 50);         // 경로에 (120, 20)에서 (20, 50)까지 직선 추가
+            context.lineTo(150, 120);       // 경로에 (20, 50)에서 (150, 120)까지 직선 추가
+            context.lineTo(120, 20);        // 경로에 (150, 120)에서 (120, 20)까지 직선 추가
+            context.strokeStyle = "magenta";// 선의 색
+            context.stroke();               // 경로에 폼함된 모든 도형을 캔버스에 그린다.
+        </script>
+    </body>
+</html>
+```
+
+### 원호 그리기
+
+컨텍스트 객체의 arc() 메소드를 이용하자.
+
+**arc(x, y, radius, startAngle, endAngle, anticlockwise)**
+
+- x, y, radius : (x, y)는 원호의 중심이고 radius는 반지름
+- startAngle : 원호의 시작 각도. 3시를 기점으로 시계방향 각도 계산.
+- endAngle : 원호의 끝 각도. 3시를 기점으로 시계방향으로 각도 계산
+- anticlockwise : true이면 반시계방향, false이면 시계방향으로 원호그리기 (default : 시계 방향)
+
+PI(파이)를 활용해서 각도를 만들어야 한다.
+
+```javascript
+// 0도에서 270도 까지 반지름 10인 원호를 그리는 코드
+context(50, 50, 10, 0, 1.5*Math.PI, false)
+// 
+context.strok();	//캔버스에 원호를 그린다.
+```
+
+
 
 
 
