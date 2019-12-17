@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    h1= title
+    hr
+    ul
+        each user in users
+            li
+                a(href=user.getUrl()) 
+                    | #{user.uid}
+                    | #{user.name}
+        else
+            li 사용자가 없습니다.
